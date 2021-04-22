@@ -22,8 +22,8 @@
 
 | Column              | Type       | Options                        |
 | ----------------    | ---------- | ------------------------------ |
-| item                | string     | null: false                    |
-| item_description    | string     | null: false                    |
+| title               | string     | null: false                    |
+| item_description    | text       | null: false                    |
 | category_id         | integer    | null: false                    |
 | item_condition_id   | integer    | null: false                    |
 | shipping_change_id  | integer    | null: false                    | 
@@ -40,9 +40,9 @@
 ## addresses テーブル
 
 | Column           | Type          | Options                        |
-| -------------    | ----------    | ------------------------------ |
+| ---------------- | ----------    | ------------------------------ |
 | postal_code      | string        | null: false                    |
-| prefectures_id   | integer       | null: false                    |
+| shipping_area_id | integer       | null: false                    |
 | municipality     | string        | null: false                    |
 | address          | string        | null: false                    |
 | building_name    | string        |                                |
