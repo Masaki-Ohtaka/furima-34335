@@ -1,19 +1,13 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
   validates :nickname,presence: true 
   with_options presence: true do
     # ひらがな、カタカナ、漢字のみ入力出来る
-    validates :last_name, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters."}
-    # ひらがな、カタカナ、漢字のみ入力出来る
-    validates :first_name, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters."}
+    validates :last_name, :first_name, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters."}
     # カタカナのみ入力出来る
-    validates :last_kana,format: {with: /\A[ァ-ヶー]+\z/, message: "is invalid. Input full-width katakana characters."}
-    # カタカナのみ入力出来る
-    validates :first_kana,format: {with: /\A[ァ-ヶー]+\z/, message: "is invalid. Input full-width katakana characters."}
+    validates :last_kana, :first_kana, format: {with: /\A[ァ-ヶー]+\z/, message: "is invalid. Input full-width katakana characters."}
   end
   validates :birthday,presence: true 
   
