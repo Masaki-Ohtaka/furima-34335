@@ -19,7 +19,7 @@ class User < ApplicationRecord
     validates :first_kana
   end
   
-  has_many :itemes
+  has_many :items
   has_many :purchases
 
 end
