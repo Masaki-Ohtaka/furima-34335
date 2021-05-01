@@ -8,7 +8,14 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item =Iteme.create(item_params)
+    @item =Iteme.new(item_params)
+    if @item.save
+      redirect_to root_path
+    else
+      @item = @item.user
+      @items = @item.users
+      #render "tweets/show" # views/tweets/show.html.erbのファイルを参照しています。
+    end
   end
   
   private
