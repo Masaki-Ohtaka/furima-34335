@@ -10,4 +10,4 @@ function item_tax (){
   });
 }
 
-window.addEventListener('load', item_tax);
+setInterval(item_tax, 1000);
