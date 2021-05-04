@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   belongs_to :condition
   belongs_to :delivery
   belongs_to :location
-  belongs_to :days
+  belongs_to :item_date
   
   belongs_to :user, optional: true
   has_one    :purchase
@@ -21,6 +21,6 @@ class Item < ApplicationRecord
     validates :condition_id
     validates :delivery_id
     validates :location_id
-    validates :days_id
+    validates :item_date_id
   end
 end

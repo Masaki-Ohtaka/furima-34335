@@ -7,7 +7,7 @@ class CreateItems < ActiveRecord::Migration[6.0]
       t.integer   :condition_id         , null: false
       t.integer   :delivery_id          , null: false
       t.integer   :location_id          , null: false
-      t.integer   :days_id              , null: false
+      t.integer   :item_date_id              , null: false
       t.integer   :price                , null: false 
       
       t.references :user,       foreign_key: true
