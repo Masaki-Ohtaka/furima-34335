@@ -9,6 +9,7 @@ function item_tax (){
     const profit = document.getElementById("profit");
     profit.innerHTML = `${SalesProfit}`;
   });
+
 }
 
 setInterval(item_tax, 1000);
