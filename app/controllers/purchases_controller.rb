@@ -1,6 +1,7 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!, only: [:index, :create]
   before_action :set_item, only: [:index, :create]
+  before_action :sold_out_item, only: [:index]
   def index
     @purchase_address = PurchaseAddress.new
     if current_user == @item.user
@@ -36,5 +37,9 @@ class PurchasesController < ApplicationController
       card: purchase_params[:token],    # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def sold_out_item
+    redirect_to root_path if @item.purchase.present?
   end
 end
