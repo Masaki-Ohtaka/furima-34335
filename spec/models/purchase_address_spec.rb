@@ -13,6 +13,10 @@ RSpec.describe PurchaseAddress, type: :model do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@purchase_address).to be_valid
       end
+      it '建物名が空でも登録できること' do
+        @purchase_address.building_name = ''
+        expect(@purchase_address).to be_valid
+      end
     end
 
     context '内容に問題がある場合' do
@@ -37,20 +41,25 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Location must be other than 1")
       end
-      it '市区町村は空だと登録できないこと' do
+      it '市区町村が空だと登録できないこと' do
         @purchase_address.municipality = ''
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Municipality can't be blank")  
       end
-
-      it '番地は空だと登録できないこと' do
+      it '番地が空だと登録できないこと' do
         @purchase_address.address = ''
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Address can't be blank")
       end
-      it '建物名は空でも登録できること' do
-        @purchase_address.building_name = ''
+      it '電話番号が空だと登録できないこと' do
+        @purchase_address.phone_number = ''
         @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number can't be blank")
+      end
+      it '電話番号は11桁以外だと登録できないこと' do
+        @purchase_address.phone_number = '1234567891011'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid. Include half-width numbers")
       end
       it 'userが紐付いていないと保存できないこと' do
         @purchase_address.user_id = nil
