@@ -11,8 +11,8 @@ class PurchasesController < ApplicationController
 
   def create
     @purchase_address = PurchaseAddress.new(purchase_params)
-    pay_item
     if @purchase_address.valid?
+      pay_item
       @purchase_address.save
       redirect_to root_path
     else
@@ -31,7 +31,7 @@ class PurchasesController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]  # 自身のPAY.JPテスト秘密鍵を環境変数設定する事により実現
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
       amount: @item.price,  # 商品の値段
       card: purchase_params[:token],    # カードトークン
