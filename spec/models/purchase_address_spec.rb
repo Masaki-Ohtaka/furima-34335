@@ -25,11 +25,15 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
       end
-
       it '郵便番号が空だと登録できないこと' do
         @purchase_address.postal_code = ''
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Postal code can't be blank")
+      end
+      it '郵便番号は全角数字では登録できないこと' do
+        @purchase_address.postal_code = '１２３４-５６７'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include('Postal code is invalid. Include hyphen(-)')
       end
       it '郵便番号が半角のハイフンを含んだ形式でないと登録できないこと' do
         @purchase_address.postal_code = '1234567'
@@ -56,11 +60,16 @@ RSpec.describe PurchaseAddress, type: :model do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Phone number can't be blank")
       end
-      it '電話番号は11桁以外だと登録できないこと' do
+      it '電話番号は11桁以上だと登録できないこと' do
         @purchase_address.phone_number = '1234567891011'
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Phone number is invalid. Include half-width numbers")
       end
+      it '電話番号は全角数字だと登録できないこと' do
+        @purchase_address.phone_number = '１２３４５６７'
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("Phone number is invalid. Include half-width numbers")
+      end      
       it 'userが紐付いていないと保存できないこと' do
         @purchase_address.user_id = nil
         @purchase_address.valid?
