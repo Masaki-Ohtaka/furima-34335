@@ -9,7 +9,7 @@ class PurchaseAddress
       validates :location_id, numericality: { other_than:1} 
       validates :municipality
       validates :address
-      validates :phone_number, format: { with: /\A0[0-9]+\z/, message: 'is invalid. Include half-width numbers' } 
+      validates :phone_number, format: { with: /\A\d{10,11}\z/, message: 'is invalid. Include half-width numbers' } 
     end
 
   def save
